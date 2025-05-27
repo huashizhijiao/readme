@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智教AI - 引领中小学教研教学辅助大模型的创新者</title>
+    
+    <!-- 引入外部框架和库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #93c5fd;
+            --dark-bg: #0f172a;
+            --darker-bg: #020617;
+            --card-bg: rgba(15, 23, 42, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-accent: #60a5fa;
+            --gradient-primary: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa);
+            --gradient-secondary: linear-gradient(45deg, #1e40af, #2563eb);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* 3D背景动画 */
+        .background-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.1) 0%, var(--darker-bg) 70%);
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: floatShape 15s infinite ease-in-out;
+        }
+
+        .shape:nth-child(odd) {
+            animation-direction: reverse;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(100px, -50px) rotate(90deg) scale(1.2);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translate(-50px, -100px) rotate(180deg) scale(0.8);
+                opacity: 0.4;
+            }
+            75% { 
+                transform: translate(-100px, 50px) rotate(270deg) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        /* 创新的导航栏 */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.2);
+        }
+
+        .navbar:hover {
+            box-shadow: 0 12px 48px rgba(37, 99, 235, 0.3);
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-secondary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a:hover::before {
+            left: 0;
+        }
+
+        /* 创新的英雄区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            line-height: 1.1;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-accent);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 创新的CTA按钮 */
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        .cta-button {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-accent);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .cta-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* 滚动指示器 */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            color: var(--text-accent);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* 功能特色区域 */
+        .features {
+            padding: 150px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(37, 99, 235, 0.3);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            position: relative;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* 统计数据区域 */
+        .stats {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 80px 40px;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 60%);
+            z-index: -1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .stat-item::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-item:hover::after {
+            opacity: 1;
+        }
+
+        /* 团队介绍区域 */
+        .team {
+            padding: 150px 20px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .team-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(37, 99, 235, 0.2);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 0 auto 25px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .team-avatar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-card:hover .team-avatar::after {
+            opacity: 0.3;
+        }
+
+        .team-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            color: var(--text-accent);
+            text-align: center;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .team-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        /* 底部区域 */
+        .footer {
+            background: var(--darker-bg);
+            padding: 80px 20px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .university-info {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 移动端响应式 */
+        @media (max-width: 768px) {
+            .navbar {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+                padding: 12px 20px;
+            }
+            
+            .nav-container {
+                gap: 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features, .team {
+                padding: 80px 20px;
+            }
+            
+            .features-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                margin: 50px 0;
+                padding: 60px 20px;
+            }
+        }
+
+        /* 自定义动画类 */
+        .slide-up {
+            transform: translateY(60px);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-up.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .scale-in {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .scale-in.animate {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* 加载动画 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(37, 99, 235, 0.2);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- 3D背景 -->
+    <div class="background-3d"></div>
+    <div class="floating-shapes" id="floatingShapes"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">智教AI</div>
+            <ul class="nav-links">
+                <li><a href="#home" data-text="首页">首页</a></li>
+                <li><a href="#features" data-text="功能">功能</a></li>
+                <li><a href="#stats" data-text="成果">成果</a></li>
+                <li><a href="#team" data-text="团队">团队</a></li>
+                <li><a href="#contact" data-text="联系">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主页区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInDown">智教AI</h1>
+            <div class="hero-subtitle animate__animated animate__fadeInLeft animate__delay-1s">
+                引领中小学教研教学辅助大模型的创新者
+            </div>
+            <div class="hero-description animate__animated animate__fadeInRight animate__delay-2s">
+                基于知名师范大学深厚的教育底蕴，融合前沿人工智能技术，<br>
+                打造专为中小学教研教学服务的智能化大模型平台，<br>
+                让每一位教师都能享受AI赋能的教学新体验
+            </div>
+            <div class="cta-group animate__animated animate__fadeInUp animate__delay-3s">
+                <a href="#features" class="cta-button cta-primary">
+                    <i class="fas fa-rocket"></i> 探索功能
+                </a>
+                <a href="#demo" class="cta-button cta-secondary">
+                    <i class="fas fa-play"></i> 观看演示
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>向下滚动探索更多</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 功能特色区域 -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header slide-up">
+                <h2 class="section-title">核心功能特色</h2>
+                <p class="section-subtitle">
+                    四大创新功能模块，全方位赋能教研教学，让AI成为教师最得力的助手
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card slide-up" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>个性化教学设计与资源检索</h3>
+                    <p>基于学生学习特点和教学目标，智能生成个性化教案，自动推荐最适合的教学策略和优质资源，显著提升教师备课效率和教学质量。</p>
+                </div>
+                <div class="feature-card slide-up" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>智能评估与题目生成</h3>
+                    <p>自动生成详细的学生学情分析报告，智能出题和批改作业，为教师提供精准的教学反馈，帮助学生实现个性化学习成长。</p>
+                </div>
+                <div class="feature-card slide-up" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-presentation"></i>
+                    </div>
+                    <h3>教学展示与课堂辅助</h3>
+                    <p>自动生成说课稿、PPT大纲及精美课件，实时转写课堂笔记，支持人机智能互动答疑，全面提升课堂教学体验和互动效果。</p>
+                </div>
+                <div class="feature-card slide-up" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>教研数据智能分析</h3>
+                    <p>依托权威教育平台，收集和分析海量专业教研数据，为教师提供科学的教学决策依据和精准的教研指导方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计数据区域 -->
+    <section class="stats" id="stats" data-aos="fade-up">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="80">0</span>
+                    <div class="stat-label">所学校成功落地</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="8000">0</span>
+                    <div class="stat-label">名教师受益使用</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span>
+                    <div class="stat-label">项核心专利技术</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span>
+                    <div class="stat-label">% 用户满意度</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="85">0</span>
+                    <div class="stat-label">% 课堂互动提升</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <div class="stat-label">% 备课时间节省</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队介绍区域 -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-header slide-up">
+                <h2 class="section-title">核心团队</h2>
+                <p class="section-subtitle">
+                    汇聚教育技术与人工智能领域的顶尖人才，致力于推动教育智能化创新发展
+                </p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="team-avatar">余</div>
+                    <div class="team-name">余柏书</div>
+                    <div class="team-role">项目负责人 · 资深教育技术专家</div>
+                    <div class="team-desc">专注人工智能教育应用研究多年，具有丰富的教育大模型开发经验，致力于推动AI技术在教育领域的创新应用。</div>
+                </div>
+                <div class="team-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="team-avatar">AI</div>
+                    <div class="team-name">AI技术团队</div>
+                    <div class="team-role">算法工程师 · 产品开发团队</div>
+                    <div class="team-desc">来自知名高校和科技企业的优秀人才，具备深厚的机器学习、自然语言处理和教育数据分析专业背景。</div>
+                </div>
+                <div class="team-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="team-avatar">教</div>
+                    <div class="team-name">教育专家顾问</div>
+                    <div class="team-role">一线教师 · 教研专家</div>
+                    <div class="team-desc">汇聚来自全国各地的优秀教师和教研专家，为产品提供专业的教育理论指导和实践经验支撑。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用场景区域 -->
+    <section class="applications" style="padding: 150px 20px; background: var(--glass-bg);">
+        <div class="container">
+            <div class="section-header slide-up">
+                <h2 class="section-title">应用场景</h2>
+                <p class="section-subtitle">
+                    覆盖教学全流程，满足不同教育场景的智能化需求
+                </p>
+            </div>
+            <div class="applications-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 80px;">
+                <div class="application-card" style="background: var(--card-bg); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="app-icon" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px;">课堂教学</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">智能生成教学内容，实时互动答疑，提升课堂参与度</p>
+                </div>
+                <div class="application-card" style="background: var(--card-bg); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="app-icon" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px;">作业批改</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">自动批改作业和试卷，生成详细学情分析报告</p>
+                </div>
+                <div class="application-card" style="background: var(--card-bg); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="app-icon" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px;">教研活动</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">支持集体备课，共享优质教学资源和经验</p>
+                </div>
+                <div class="application-card" style="background: var(--card-bg); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.1);" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="app-icon" style="width: 60px; height: 60px; background: var(--gradient-primary); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); margin-bottom: 15px;">学生辅导</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">个性化学习建议，针对性能力提升方案</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们区域 -->
+    <section class="contact" id="contact" style="padding: 150px 20px;">
+        <div class="container">
+            <div class="section-header slide-up">
+                <h2 class="section-title">携手共创教育未来</h2>
+                <p class="section-subtitle">
+                    欢迎与我们合作，共同推动教育智能化发展
+                </p>
+            </div>
+            <div class="contact-content" style="max-width: 800px; margin: 80px auto; text-align: center;">
+                <div class="contact-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                    <div class="contact-card" style="background: var(--glass-bg); border-radius: 20px; padding: 40px; backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--text-accent); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px;">邮箱联系</h3>
+                        <p style="color: var(--text-secondary);">zhijiao@ai-edu.com</p>
+                    </div>
+                    <div class="contact-card" style="background: var(--glass-bg); border-radius: 20px; padding: 40px; backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-phone" style="font-size: 2.5rem; color: var(--text-accent); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px;">电话咨询</h3>
+                        <p style="color: var(--text-secondary);">400-XXX-XXXX</p>
+                    </div>
+                    <div class="contact-card" style="background: var(--glass-bg); border-radius: 20px; padding: 40px; backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease;" data-aos="fade-up" data-aos-delay="300">
+                        <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; color: var(--text-accent); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px;">地址位置</h3>
+                        <p style="color: var(--text-secondary);">广东省广州市</p>
+                    </div>
+                </div>
+                <div class="cta-final" data-aos="zoom-in" data-aos-delay="400">
+                    <a href="#demo" class="cta-button cta-primary" style="font-size: 1.2rem; padding: 20px 40px;">
+                        <i class="fas fa-rocket"></i> 立即体验智教AI
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部区域 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">智教AI</div>
+            <div class="footer-text">
+                让教师真正回归课堂教学本身，让每一位学生都能获得高水平教学资源。<br>
+                用人工智能的力量，为教育创造无限可能。
+            </div>
+            <div class="university-info">
+                依托知名师范大学深厚教育底蕴<br>
+                国家"双一流"建设高校 · "211工程"重点建设大学<br>
+                教育技术学A类专业 · 教育科技人才培养基地<br>
+                <br>
+                © 2024 智教AI. 保留所有权利.
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入外部JavaScript库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 隐藏加载动画
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }, 1500);
+
+            // 初始化AOS动画库
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+
+            // 创建浮动形状
+            createFloatingShapes();
+            
+            // 初始化滚动动画
+            initScrollAnimations();
+            
+            // 初始化导航功能
+            initNavigation();
+            
+            // 初始化统计数字动画
+            initCounterAnimation();
+            
+            // 初始化3D鼠标跟随效果
+            init3DMouseEffect();
+            
+            // 初始化视差滚动效果
+            initParallaxEffect();
+        });
+
+        // 创建浮动形状
+        function createFloatingShapes() {
+            const container = document.getElementById('floatingShapes');
+            const shapeCount = 15;
+            
+            for (let i = 0; i < shapeCount; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'shape';
+                
+                const size = Math.random() * 100 + 50;
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 10;
+                
+                shape.style.width = size + 'px';
+                shape.style.height = size + 'px';
+                shape.style.left = x + 'px';
+                shape.style.top = y + 'px';
+                shape.style.animationDelay = delay + 's';
+                shape.style.animationDuration = duration + 's';
+                
+                container.appendChild(shape);
+            }
+        }
+
+        // 滚动动画处理
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.slide-up, .scale-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // 导航功能
+        function initNavigation() {
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 100;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 导航栏滚动效果
+            let lastScrollY = window.scrollY;
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 100) {
+                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    navbar.style.borderColor = 'rgba(37, 99, 235, 0.3)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.05)';
+                    navbar.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                }
+                
+                // 导航栏隐藏/显示效果
+                if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                    navbar.style.transform = 'translateX(-50%) translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateX(-50%) translateY(0)';
+                }
+                
+                lastScrollY = currentScrollY;
+            });
+        }
+
+        // 统计数字动画
+        function initCounterAnimation() {
+            const counters = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                        entry.target.classList.add('counted');
+                        animateCounter(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.count);
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '');
+                }
+            }, 16);
+        }
+
+        // 3D鼠标跟随效果
+        function init3DMouseEffect() {
+            let mouseX = 0, mouseY = 0;
+            let currentX = 0, currentY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+            });
+
+            function animate() {
+                currentX += (mouseX - currentX) * 0.1;
+                currentY += (mouseY - currentY) * 0.1;
+
+                // 应用3D变换到卡片
+                document.querySelectorAll('.feature-card, .team-card').forEach((card, index) => {
+                    const intensity = (index % 3 + 1) * 2;
+                    const rotateX = currentY * intensity;
+                    const rotateY = currentX * intensity;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // 视差滚动效果
+        function initParallaxEffect() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+
+                document.querySelector('.background-3d').style.transform = `translateY(${rate}px)`;
+                
+                document.querySelectorAll('.shape').forEach((shape, index) => {
+                    const speed = (index % 3 + 1) * 0.3;
+                    shape.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+        }
+
+        // 添加卡片悬停音效（可选）
+        function addHoverSounds() {
+            const cards = document.querySelectorAll('.feature-card, .team-card, .contact-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    // 可以添加音效
+                    card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+        }
+
+        // 窗口大小改变时重新初始化
+        window.addEventListener('resize', () => {
+            // 重新创建浮动形状
+            document.getElementById('floatingShapes').innerHTML = '';
+            createFloatingShapes();
+        });
+
+        // 添加键盘导航支持
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // 页面可见性API，优化性能
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // 页面不可见时暂停动画
+                document.querySelectorAll('.shape').forEach(shape => {
+                    shape.style.animationPlayState = 'paused';
+                });
+            } else {
+                // 页面可见时恢复动画
+                document.querySelectorAll('.shape').forEach(shape => {
+                    shape.style.animationPlayState = 'running';
+                });
+            }
+        });
+    </script>
+
+    <style>
+        /* 添加卡片悬停效果 */
+        .application-card:hover,
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        /* 键盘导航样式 */
+        .keyboard-navigation *:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .applications-grid,
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</body>
+</html>
