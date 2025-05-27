@@ -97,76 +97,7 @@
 
 ---
 
-## 🛠️ 技术架构
-
-### 💻 前端技术栈
-
-```javascript
-// 现代化前端框架
-const techStack = {
-  ui: ["HTML5", "CSS3", "JavaScript ES6+"],
-  animations: ["AOS.js", "Animate.CSS"],
-  icons: ["Font Awesome 6.4.0"],
-  fonts: ["Google Fonts - Inter"],
-  effects: ["3D Transforms", "Parallax Scrolling", "Glassmorphism"]
-}
-```
-
-### 🧠 核心技术特性
-
-- **🎨 现代化设计系统** - 玻璃拟态设计 + 科技蓝配色
-- **⚡ 高性能动画** - 60fps流畅动画体验
-- **📱 响应式布局** - 完美适配各种设备
-- **🔄 智能交互** - 3D鼠标跟随 + 视差滚动
-- **♿ 无障碍支持** - 键盘导航 + 屏幕阅读器友好
-
----
-
-## 🚀 快速开始
-
-### 📋 环境要求
-
-- 现代浏览器 (Chrome 90+, Firefox 88+, Safari 14+)
-- HTTP服务器 (可选，用于本地开发)
-
-### 🔧 安装步骤
-
-1. **克隆项目**
-   ```bash
-   git clone https://github.com/username/zhijiao-ai.git
-   cd zhijiao-ai
-   ```
-
-2. **启动服务**
-   ```bash
-   # 使用Python启动本地服务器
-   python -m http.server 8000
-   
-   # 或使用Node.js
-   npx serve .
-   
-   # 或使用Live Server (VS Code插件)
-   ```
-
-3. **访问应用**
-   ```
-   打开浏览器访问: http://localhost:8000
-   ```
-
-### 🎯 目录结构
-
-```
-zhijiao-ai/
-├── 📄 index.html          # 主页面文件
-├── 📁 assets/            # 静态资源
-│   ├── 🎨 css/          # 样式文件
-│   ├── 📜 js/           # JavaScript文件
-│   └── 🖼️ images/        # 图片资源
-├── 📋 README.md          # 项目说明
-└── 📜 LICENSE           # 开源协议
-```
-
----
+#
 
 ## 🎨 演示
 
@@ -230,50 +161,9 @@ graph TB
 
 ### 🌟 核心成员
 
-<table>
-<tr>
-<td align="center" width="33%">
-<img src="https://via.placeholder.com/150/2563eb/ffffff?text=余" style="border-radius: 50%; width: 100px; height: 100px;">
-<br><strong>余柏书</strong>
-<br><em>项目负责人</em>
-<br>资深教育技术专家
-</td>
-<td align="center" width="33%">
-<img src="https://via.placeholder.com/150/3b82f6/ffffff?text=AI" style="border-radius: 50%; width: 100px; height: 100px;">
-<br><strong>AI技术团队</strong>
-<br><em>算法工程师</em>
-<br>产品开发团队
-</td>
-<td align="center" width="33%">
-<img src="https://via.placeholder.com/150/60a5fa/ffffff?text=教" style="border-radius: 50%; width: 100px; height: 100px;">
-<br><strong>教育专家顾问</strong>
-<br><em>一线教师</em>
-<br>教研专家团队
-</td>
-</tr>
-</table>
-
 ---
 
-## 📖 文档
 
-### 📚 详细文档
-
-- 📋 [项目介绍](docs/introduction.md)
-- 🔧 [安装指南](docs/installation.md)
-- 🎯 [使用教程](docs/tutorial.md)
-- 🔌 [API文档](docs/api.md)
-- 🎨 [设计规范](docs/design-guide.md)
-- ❓ [常见问题](docs/faq.md)
-
-### 🏗️ 开发指南
-
-- 🛠️ [开发环境搭建](docs/development.md)
-- 🎨 [前端开发规范](docs/frontend-guide.md)
-- 🧪 [测试指南](docs/testing.md)
-- 📦 [部署指南](docs/deployment.md)
-
----
 
 ## 🤝 贡献
 
@@ -309,7 +199,7 @@ graph TB
 ```
 MIT License
 
-Copyright (c) 2024 智教AI团队
+Copyright (c) 2025 智教AI团队
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -365,12 +255,7 @@ in the Software without restriction...
 
 ### 🚀 Version 2.0 规划
 
-- [ ] 🌍 多语言支持
-- [ ] 📱 移动端原生应用
-- [ ] 🎯 更多学科支持
-- [ ] 🤖 语音交互功能
-- [ ] 📊 高级数据分析
-- [ ] 🔗 第三方平台集成
+
 
 ### 🎯 长期愿景
 
