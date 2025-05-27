@@ -216,12 +216,12 @@ in the Software without restriction...
 
 我们期待与您的合作，共同推动教育智能化发展！
 
-[![邮箱](https://img.shields.io/badge/📧_Email-zhijiao@ai--edu.com-2563eb?style=for-the-badge)](mailto:zhijiao@ai-edu.com)
+
 [![电话](https://img.shields.io/badge/📞_Phone-400--XXX--XXXX-3b82f6?style=for-the-badge)](tel:400-XXX-XXXX)
 [![地址](https://img.shields.io/badge/📍_Address-广东省广州市-60a5fa?style=for-the-badge)](https://maps.google.com)
 
 [![GitHub](https://img.shields.io/badge/GitHub-智教AI-181717?style=for-the-badge&logo=github)](https://github.com/username/zhijiao-ai)
-[![官网](https://img.shields.io/badge/🌐_官网-zhijiao--ai.com-2563eb?style=for-the-badge)](https://zhijiao-ai.com)
+
 
 </div>
 
